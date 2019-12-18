@@ -6,24 +6,25 @@
  * @flow
  */
 
-import React from 'react';
-import {SafeAreaView, StyleSheet, View, Animated, Easing} from 'react-native';
-import SimpleCircleView from './src/SimpleCircleView';
+import React from "react";
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+} from "react-native";
+import SimpleCircleView from "./src/SimpleCircleView";
+const NativeAnimatedView = require("./lib/native-animated-view/NativeAnimatedView");
 
 const VIEW_SIZE = 50;
 const ANIM_DURATION = 3000;
 
 const App: () => React$Node = () => {
   const [parentViewHeight, setParentViewHeight] = React.useState(0);
-  const [relativePosition] = React.useState(new Animated.Value(0));
+  const ref = React.useRef(null);
 
   React.useEffect(() => {
-    Animated.timing(relativePosition, {
-      toValue: parentViewHeight - VIEW_SIZE,
-      duration: ANIM_DURATION,
-      easing: Easing.bounce,
-    }).start();
-  }, [relativePosition, parentViewHeight]);
+    ref.current.start();
+  }, [ref, parentViewHeight]);
 
   return (
     <View>
@@ -32,10 +33,18 @@ const App: () => React$Node = () => {
           style={styles.container}
           onLayout={event => {
             setParentViewHeight(event.nativeEvent.layout.height);
-          }}>
-          <Animated.View style={{top: relativePosition}}>
-            <SimpleCircleView size={VIEW_SIZE} />
-          </Animated.View>
+          }}
+        >
+          <View>
+            <NativeAnimatedView
+              y={parentViewHeight - VIEW_SIZE}
+              ref={ref}
+              interpolation={{ type: "bounce" }}
+              duration={ANIM_DURATION}
+            >
+              <SimpleCircleView size={VIEW_SIZE} />
+            </NativeAnimatedView>
+          </View>
         </View>
       </SafeAreaView>
     </View>
@@ -44,11 +53,11 @@ const App: () => React$Node = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    height: '100%',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
+    width: "100%",
+    height: "100%",
+    flexDirection: "column",
+    alignItems: "center"
+  }
 });
 
 export default App;
