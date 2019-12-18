@@ -16,7 +16,7 @@ import SimpleCircleView from "./src/SimpleCircleView";
 const NativeAnimatedView = require("./lib/native-animated-view/NativeAnimatedView");
 
 const VIEW_SIZE = 50;
-const ANIM_DURATION = 3000;
+const ANIM_DURATION = 6000;
 
 const App: () => React$Node = () => {
   const [parentViewHeight, setParentViewHeight] = React.useState(0);
