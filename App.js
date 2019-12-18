@@ -11,7 +11,7 @@ import {SafeAreaView, StyleSheet, View, Animated, Easing} from 'react-native';
 import SimpleCircleView from './src/SimpleCircleView';
 
 const VIEW_SIZE = 50;
-const ANIM_DURATION = 3000;
+const ANIM_DURATION = 6000;
 
 const App: () => React$Node = () => {
   const [parentViewHeight, setParentViewHeight] = React.useState(0);
