@@ -10,14 +10,6 @@ import React from 'react';
 import {SafeAreaView, StyleSheet, View, Animated, Easing} from 'react-native';
 import SimpleCircleView from './src/SimpleCircleView';
 
-setTimeout(stressJSThread, 1000);
-function stressJSThread() {
-  const date = new Date();
-  let i = 0;
-  while(new Date() - date < 400) i++;
-  setTimeout(stressJSThread, 1000);
-}
-
 const VIEW_SIZE = 50;
 const ANIM_DURATION = 3000;
 
